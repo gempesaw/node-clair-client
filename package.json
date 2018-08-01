@@ -1,0 +1,37 @@
+{
+  "name": "clair",
+  "version": "1.0.0",
+  "description": "API bindings to coreos/clair@2.0.4",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gempesaw/node-clair.git"
+  },
+  "keywords": [
+    "clair",
+    "coreos",
+    "security",
+    "vulnernability",
+    "docker",
+    "scanning"
+  ],
+  "author": "Daniel Gempesaw <dgempesaw@sharecare.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gempesaw/node-clair/issues"
+  },
+  "homepage": "https://github.com/gempesaw/node-clair#readme",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "docker-registry-client": "^3.3.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  }
+}
