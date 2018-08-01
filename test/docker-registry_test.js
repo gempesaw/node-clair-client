@@ -18,26 +18,33 @@ describe('docker registry', () => {
   it('should get manifests for a public registry image', async () => {
     registry = new DockerRegistry('image:tag');
     realGetManifest = registry.registry.getManifest;
-    registry.registry.getManifest = (opts, cb) => cb(null, { layers: [{ digest: 'some-blob' }] });
+    registry.registry.getManifest = (opts, cb) => cb(null, { config: { digest: 'digest' }, layers: [{ digest: 'some-blob' }] });
     const layers = await registry.getLayers();
-    expect(layers).to.eql([ 'docker.io/v2/library/image/some-blob' ]);
+    expect(layers).to.eql([{
+      Name: 'digestsome-blob',
+      Path: 'docker.io/v2/library/image/some-blob'
+    }]);
   });
 
   it('should get manifests for a private registry image', async () => {
     registry = new DockerRegistry('some.private.registry/image:tag');
     realGetManifest = registry.registry.getManifest;
-    registry.registry.getManifest = (opts, cb) => cb(null, { layers: [{ digest: 'some-blob' }] });
+    registry.registry.getManifest = (opts, cb) => cb(null, { config: { digest: 'digest' }, layers: [{ digest: 'some-blob' }] });
     const layers = await registry.getLayers();
-    expect(layers).to.eql([ 'some.private.registry/v2/image/some-blob' ]);
+    expect(layers).to.eql([{
+      Name: 'digestsome-blob',
+      Path: 'some.private.registry/v2/image/some-blob'
+    }]);
   });
 
   // generally skipped to avoid a network call
   it.skip('should actually successfully look up an actual docker image', async () => {
     registry = new DockerRegistry('alpine');
     const layers = await registry.getLayers();
-    expect(layers).to.eql([
-      'docker.io/v2/library/alpine/sha256:8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6'
-    ]);
+    expect(layers).to.eql([{
+      Name: '11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6',
+      Path: 'docker.io/v2/library/alpine/sha256:8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6'
+    }]);
   });
 
   afterEach(() => {
