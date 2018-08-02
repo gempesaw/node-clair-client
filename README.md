@@ -1,8 +1,9 @@
 # node-clair-client
 
-This module is a with api bindings to [coreos/clair@2.0.4][clair]. It uses
-the v1 Clair API endpoints, not v3. Currently, it only implements the
-"upload layer" and "get layer" endpoints; contributions are welcome.
+This module is a set of api bindings to
+[coreos/clair@2.0.4][clair]. It uses the v1 Clair API endpoints, not
+v3. Currently, it only implements the "upload layer" and "get layer"
+endpoints; contributions are welcome.
 
 ## installation
 
@@ -12,8 +13,8 @@ npm i clair-client
 
 ## usage
 
-To use this module, you need a clair server running somewhere to talk
-to. That must be passed in to the `clair-client` constructor.
+To use this module, you need a clair server available somewhere - its
+address must be passed in to the `clair-client` constructor.
 
 For a public image,
 
@@ -57,6 +58,9 @@ environment variable DEBUG to that value:
 ```
 DEBUG=Clair.* node script.js
 ```
+
+Note that this will log out your docker credentials, as they're part
+of the POST body to the Clair server.
 
 [clair]: https://github.com/coreos/clair/tree/v2.0.4
 [debug]: https://www.npmjs.com/package/debug
