@@ -1,8 +1,8 @@
 {
   "name": "clair",
   "version": "1.0.0",
-  "description": "API bindings to coreos/clair@2.0.4",
-  "main": "index.js",
+  "description": "API bindings to coreos/clair@2.0.4 - (clair api v1, not v3)",
+  "main": "lib/clair.js",
   "scripts": {
     "test": "mocha"
   },
