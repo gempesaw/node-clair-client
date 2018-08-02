@@ -22,7 +22,7 @@ describe('docker registry', () => {
     const layers = await registry.getLayers();
     expect(layers).to.eql([{
       Name: 'digestsome-blob',
-      Path: 'docker.io/v2/library/image/some-blob'
+      Path: 'registry-1.docker.io/v2/library/image/some-blob'
     }]);
   });
 
