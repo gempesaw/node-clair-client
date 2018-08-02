@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/gempesaw/node-clair#readme",
   "dependencies": {
+    "assert-plus": "^1.0.0",
     "debug": "^3.1.0",
     "docker-registry-client": "^3.3.0",
     "request": "^2.87.0",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "express": "^4.16.3",
     "mocha": "^5.2.0"
   }
 }
