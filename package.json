@@ -1,6 +1,6 @@
 {
   "name": "clair-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "API bindings to coreos/clair@2.0.4 - (clair api v1, not v3)",
   "main": "lib/clair.js",
   "scripts": {
