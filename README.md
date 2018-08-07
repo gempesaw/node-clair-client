@@ -11,6 +11,9 @@ endpoints; contributions are welcome.
 npm i clair-client
 ```
 
+This module requires node@8+, as it uses async/await without
+transpilation.
+
 ## usage
 
 To use this module, you need a clair server available somewhere - its
