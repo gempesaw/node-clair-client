@@ -22,7 +22,7 @@ describe('docker registry', () => {
     const layers = await registry.getLayers();
     expect(layers).to.eql([{
       Name: 'digestsome-blob',
-      Path: 'https://registry-1.docker.io/v2/library/image/blobs/some-blob'
+      Path: 'https://registry.hub.docker.com/v2/library/image/blobs/some-blob'
     }]);
   });
 
@@ -56,7 +56,7 @@ describe('docker registry', () => {
     const layers = await registry.getLayers();
     expect(layers).to.eql([{
       Name: '11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6',
-      Path: 'https://registry-1.docker.io/v2/library/alpine/blobs/sha256:8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6'
+      Path: 'https://registry.hub.docker.com/v2/library/alpine/blobs/sha256:8e3ba11ec2a2b39ab372c60c16b421536e50e5ce64a0bc81765c2e38381bcff6'
     }]);
   });
 
