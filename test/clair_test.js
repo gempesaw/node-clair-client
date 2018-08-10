@@ -101,5 +101,6 @@ describe('Clair', () => {
 });
 
 const fakeRegistry = {
-  getLayers: () => ([{  Name: 'first-name', Path: 'first-path' }, {  Name: 'name', Path: 'path' }])
+  getLayers: () => ([{  Name: 'first-name', Path: 'first-path' }, {  Name: 'name', Path: 'path' }]),
+  getAuthorization: () => Promise.resolve('Bearer token')
 };

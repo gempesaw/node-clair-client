@@ -15,6 +15,18 @@ describe('docker registry', () => {
     expect(registry.clientArgs).to.eql({});
   });
 
+  it('should retrieve authorization', async () => {
+    registry = new DockerRegistry('alpine');
+    registry.registry = {
+      _headers: {
+        authorization: 'expected'
+      },
+      login: (cb) => cb(null)
+    };
+
+    expect(await registry.getAuthorization()).to.eql('expected');
+  });
+
   it('should get manifests for a public registry image', async () => {
     registry = new DockerRegistry('image:tag');
     realGetManifest = registry.registry.getManifest;
