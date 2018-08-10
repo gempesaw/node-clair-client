@@ -3,17 +3,21 @@ const express = require('express');
 const Clair = require('..');
 
 describe('Clair', () => {
-  let server; // fakeClair() writes the server to this global variable
-              // so we can close it afterwards. awk!
+  // fakeClair() writes the server to this global variable
+  // so we can close it afterwards. awk!
+  let server;
 
   const fakeClair = ({
     analysis = { Layer: { Features: [] } },
-    upload = (req, res, next) => { res.statusCode = 201; res.json({ done: 'done' }); }
+    upload = (req, res) => {
+      res.statusCode = 201;
+      res.json({ done: 'done' });
+    }
   } = {}) => new Promise((resolve, reject) => {
     const app = express();
     app.post('*', upload);
 
-    app.get('/v1/layers/name', (req, res, next) => res.json(analysis));
+    app.get('/v1/layers/name', (req, res) => res.json(analysis));
 
     server = app.listen(0, (err) => {
       if (err) {
@@ -24,6 +28,11 @@ describe('Clair', () => {
       resolve(`http://0.0.0.0:${port}`);
     });
   });
+
+  const fakeRegistry = {
+    getLayers: () => ([{ Name: 'first-name', Path: 'first-path' }, { Name: 'name', Path: 'path' }]),
+    getAuthorization: () => Promise.resolve('Bearer token')
+  };
 
   it('should analyze images without vulnerabilities', async () => {
     const clairAddress = await fakeClair();
@@ -56,7 +65,7 @@ describe('Clair', () => {
       analysis: {
         Layer: {
           Features: [
-            { Vulnerabilities: [{ hi: 'hi' } ] }
+            { Vulnerabilities: [{ hi: 'hi' }] }
           ]
         }
       }
@@ -69,12 +78,12 @@ describe('Clair', () => {
     });
 
     expect(analysis.isVulnerable).to.equal(true);
-    expect(analysis.vulnerabilities).to.eql([{ Vulnerabilities: [{ hi: 'hi' } ] }]);
+    expect(analysis.vulnerabilities).to.eql([{ Vulnerabilities: [{ hi: 'hi' }] }]);
   });
 
   it('should throw an error when the uploads fail', async () => {
     const clairAddress = await fakeClair({
-      upload: (req, res, next) => {
+      upload: (req, res) => {
         res.statusCode = 404;
         res.json({ upload: 'fail' });
       }
@@ -82,10 +91,11 @@ describe('Clair', () => {
 
     try {
       const clair = new Clair({ clairAddress });
-      const analysis = await clair.analyze({
+      await clair.analyze({
         image: 'image',
         registry: fakeRegistry
       });
+      expect(true).to.equal(false);
     }
     catch (err) {
       expect(err.message).to.include('error uploading layers for image \'image\'');
@@ -99,8 +109,3 @@ describe('Clair', () => {
     }
   });
 });
-
-const fakeRegistry = {
-  getLayers: () => ([{  Name: 'first-name', Path: 'first-path' }, {  Name: 'name', Path: 'path' }]),
-  getAuthorization: () => Promise.resolve('Bearer token')
-};
