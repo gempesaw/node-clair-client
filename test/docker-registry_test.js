@@ -6,13 +6,18 @@ describe('docker registry', () => {
   let realGetManifest;
 
   it('should construct client args partial with credentials', () => {
-    registry = new DockerRegistry('alpine', 'username', 'password');
+    registry = new DockerRegistry('some.private.registry/alpine', 'username', 'password');
     expect(registry.clientArgs).to.eql({ username: 'username', password: 'password' });
   });
 
   it('should construct client args without creds', () => {
     registry = new DockerRegistry('alpine');
     expect(registry.clientArgs).to.eql({});
+  });
+
+  it('should not use passed in creds for public images', () => {
+    registry = new DockerRegistry('alpine', 'username', 'password');
+    expect(registry.clientArgs).to.eql({ });
   });
 
   it('should retrieve authorization', async () => {
