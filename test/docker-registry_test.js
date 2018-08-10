@@ -46,7 +46,7 @@ describe('docker registry', () => {
       expect(true).to.equal(false);
     }
     catch (err) {
-      expect(err).to.include('unauthorized');
+      expect(err.message).to.include('unauthorized');
     }
   });
 
