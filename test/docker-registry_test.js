@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const DockerRegistry = require('../lib/docker-registry.js');
+const DockerRegistry = require('../lib/docker-registry');
 
 describe('docker registry', () => {
   let registry;

@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const express = require('express');
-const Clair = require('..');
+const Clair = require('../lib/clair');
 
 describe('Clair', () => {
   // fakeClair() writes the server to this global variable
