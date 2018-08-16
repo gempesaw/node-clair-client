@@ -2,10 +2,19 @@
   "name": "clair-client",
   "version": "1.1.0",
   "description": "API bindings to coreos/clair@2.0.4 - (clair api v1, not v3)",
-  "main": "lib/clair.js",
+  "main": "dist/lib/clair.js",
+  "files": [
+    "dist/lib/clair.js",
+    "dist/lib/docker-registry.js",
+    "dist/lib/error.js"
+  ],
   "scripts": {
     "test": "npm run lint && mocha",
-    "lint": "eslint --format unix lib test"
+    "lint": "eslint --format unix lib test",
+    "build": "npm run clean && babel lib -d dist/lib && babel test -d dist/test",
+    "test6": "npm run build && mocha dist/test",
+    "prepublishOnly": "npm run build",
+    "clean": "rm -rf ./dist"
   },
   "repository": {
     "type": "git",
@@ -33,6 +42,9 @@
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.0.0",
