@@ -1,18 +1,15 @@
 # node-clair-client [![Build Status](https://travis-ci.org/gempesaw/node-clair-client.svg?branch=master)](https://travis-ci.org/gempesaw/node-clair-client)
 
-This module is a set of api bindings to
-[coreos/clair@2.0.4][clair]. It uses the v1 Clair API endpoints, not
-v3. Currently, it only implements the "upload layer" and "get layer"
-endpoints; contributions are welcome.
+This module is a set of api bindings to [coreos/clair@2.0.4][]. It
+uses the v1 Clair API endpoints, not v3. Currently, it only implements
+the "upload layer" and "get layer" endpoints; contributions are
+welcome.
 
 ## installation
 
 ```
 npm i clair-client
 ```
-
-This module requires node@8+, as it uses async/await without
-transpilation.
 
 ## usage
 
@@ -65,5 +62,5 @@ DEBUG=Clair.* node script.js
 Note that this will log out your docker credentials, as they're part
 of the POST body to the Clair server.
 
-[clair]: https://github.com/coreos/clair/tree/v2.0.4
+[coreos/clair@2.0.4]: https://github.com/coreos/clair/tree/v2.0.4
 [debug]: https://www.npmjs.com/package/debug
