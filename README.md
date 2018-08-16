@@ -1,4 +1,4 @@
-# node-clair-client
+# node-clair-client [![Build Status](https://travis-ci.org/gempesaw/node-clair-client.svg?branch=master)](https://travis-ci.org/gempesaw/node-clair-client)
 
 This module is a set of api bindings to
 [coreos/clair@2.0.4][clair]. It uses the v1 Clair API endpoints, not
