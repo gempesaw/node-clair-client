@@ -32,6 +32,25 @@ const Clair = require('clair-client');
 })();
 ```
 
+For a private image in docker.io,
+
+```
+const Clair = require('clair-client');
+
+(async () => {
+  const clairAddress = 'https://your.clair.server';
+  const clair = new Clair({ clairAddress });
+  const analysis = await clair.analyze({
+    image: 'my-dockerhub-username/alpine:3.2',
+    isPublic: false
+  });
+
+  if (analysis.isVulnerable) {
+    console.log(analysis.vulnerabilities);
+  }
+})();
+```
+
 To check an image in a private registry,
 
 ```
